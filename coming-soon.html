@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MILANYA — Launching Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased}
+body{
+  font-family:'DM Sans','Noto Sans SC',sans-serif;
+  background:#1C1C1C;color:#fff;
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:40px 24px;text-align:center;
+}
+.logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:300;letter-spacing:8px;
+  text-transform:uppercase;margin-bottom:32px;
+}
+.divider{
+  width:100%;max-width:480px;height:1px;
+  background:rgba(255,255,255,0.2);margin:0 auto 40px;
+}
+.headline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,6vw,64px);font-weight:300;
+  letter-spacing:1px;line-height:1.1;margin-bottom:40px;
+}
+.password-row{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,0.6);margin-bottom:48px;
+  cursor:pointer;transition:color 0.3s;
+}
+.password-row:hover{color:#fff}
+.password-row svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.5;fill:none}
+
+.sub-headline{
+  font-size:clamp(20px,3vw,32px);font-weight:300;
+  letter-spacing:0.5px;line-height:1.3;margin-bottom:12px;
+}
+.sub-desc{
+  font-size:14px;color:rgba(255,255,255,0.5);
+  font-weight:300;margin-bottom:48px;line-height:1.6;
+}
+
+.email-form{
+  display:flex;gap:0;max-width:520px;width:100%;margin:0 auto 64px;
+}
+.email-form input{
+  flex:1;height:52px;padding:0 20px;
+  background:#fff;border:none;
+  font-size:14px;color:#1C1C1C;font-family:inherit;
+  outline:none;
+}
+.email-form input::placeholder{color:#999}
+.email-form button{
+  height:52px;padding:0 32px;
+  background:#fff;border:1px solid #fff;
+  color:#1C1C1C;font-size:12px;letter-spacing:2px;
+  text-transform:uppercase;font-weight:500;
+  font-family:inherit;cursor:pointer;transition:all 0.3s;
+}
+.email-form button:hover{background:transparent;color:#fff}
+
+.social-title{
+  font-size:16px;font-weight:500;margin-bottom:20px;
+}
+.social-links{
+  display:flex;justify-content:center;gap:32px;margin-bottom:64px;
+}
+.social-links a{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;color:rgba(255,255,255,0.5);
+  transition:color 0.3s;
+}
+.social-links a:hover{color:#fff}
+.social-links svg{width:16px;height:16px;fill:currentColor}
+
+.footer-note{
+  font-size:12px;color:rgba(255,255,255,0.3);
+  font-weight:300;
+}
+
+/* Password modal */
+.pw-overlay{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transition:all 0.3s;
+}
+.pw-overlay.active{opacity:1;visibility:visible}
+.pw-box{
+  background:#fff;color:#1C1C1C;padding:48px 40px;
+  max-width:420px;width:90%;text-align:center;position:relative;
+}
+.pw-box h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;font-weight:400;margin-bottom:8px;
+}
+.pw-box p{
+  font-size:13px;color:#666;margin-bottom:28px;
+}
+.pw-box input{
+  width:100%;height:48px;padding:0 16px;
+  border:1px solid #ddd;font-size:14px;font-family:inherit;
+  margin-bottom:16px;outline:none;
+}
+.pw-box input:focus{border-color:#1C1C1C}
+.pw-box .pw-submit{
+  width:100%;height:48px;background:#1C1C1C;color:#fff;
+  border:none;font-size:12px;letter-spacing:2px;
+  text-transform:uppercase;cursor:pointer;transition:opacity 0.3s;
+}
+.pw-box .pw-submit:hover{opacity:0.8}
+.pw-close{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;display:flex;
+  align-items:center;justify-content:center;
+  cursor:pointer;color:#999;transition:color 0.3s;
+}
+.pw-close:hover{color:#1C1C1C}
+
+@media(max-width:480px){
+  .email-form{flex-direction:column}
+  .email-form button{width:100%}
+  .social-links{gap:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="logo">MILANYA</div>
+<div class="divider"></div>
+<div class="headline">Launching Soon!</div>
+
+<div class="password-row" id="pwToggle">
+  <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+  <span>Enter using password</span>
+</div>
+
+<div class="sub-headline">Be The First To Know When<br>We Launch.</div>
+<div class="sub-desc">Promotions, new products and sales. Directly to your inbox.</div>
+
+<form class="email-form" onsubmit="event.preventDefault();handleSubscribe(this)">
+  <input type="email" placeholder="Email address" required>
+  <button type="submit">Submit</button>
+</form>
+
+<div class="social-title">Spread The Word</div>
+<div class="social-links">
+  <a href="#" onclick="shareFacebook();return false">
+    <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    Share
+  </a>
+  <a href="#" onclick="shareTwitter();return false">
+    <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+    Tweet
+  </a>
+  <a href="#" onclick="sharePinterest();return false">
+    <svg viewBox="0 0 24 24"><path d="M8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0z"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/></svg>
+    Pin it
+  </a>
+</div>
+
+<div class="footer-note">MILANYA 泌澜雅 — Science in Nature, Beauty in Balance</div>
+
+<!-- Password Modal -->
+<div class="pw-overlay" id="pwOverlay">
+  <div class="pw-box">
+    <div class="pw-close" id="pwClose">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </div>
+    <h3>Enter store using password</h3>
+    <p>Are you the store owner? Log in here to manage your store.</p>
+    <input type="password" placeholder="Your password" id="pwInput">
+    <button class="pw-submit" onclick="checkPassword()">Enter</button>
+  </div>
+</div>
+
+<script>
+function handleSubscribe(form){
+  const email=form.querySelector('input').value;
+  alert('感谢订阅！上线后我们将第一时间通知您：' + email);
+  form.reset();
+}
+function shareFacebook(){
+  const url=encodeURIComponent(window.location.href);
+  window.open('https://www.facebook.com/sharer/sharer.php?u='+url,'_blank','width=600,height=400');
+}
+function shareTwitter(){
+  const text=encodeURIComponent('MILANYA 泌澜雅即将上线 — Science in Nature, Beauty in Balance');
+  const url=encodeURIComponent(window.location.href);
+  window.open('https://twitter.com/intent/tweet?text='+text+'&url='+url,'_blank','width=600,height=400');
+}
+function sharePinterest(){
+  const url=encodeURIComponent(window.location.href);
+  const desc=encodeURIComponent('MILANYA 泌澜雅 — 以植物科学为基，屏障修护为本的高端护肤品牌');
+  window.open('https://pinterest.com/pin/create/button/?url='+url+'&description='+desc,'_blank','width=600,height=400');
+}
+
+document.getElementById('pwToggle').addEventListener('click',()=>{
+  document.getElementById('pwOverlay').classList.add('active');
+});
+document.getElementById('pwClose').addEventListener('click',()=>{
+  document.getElementById('pwOverlay').classList.remove('active');
+});
+document.getElementById('pwOverlay').addEventListener('click',e=>{
+  if(e.target===e.currentTarget)document.getElementById('pwOverlay').classList.remove('active');
+});
+function checkPassword(){
+  const pw=document.getElementById('pwInput').value;
+  if(pw==='milanya2026'){
+    window.location.href='milanya-website.html';
+  }else{
+    alert('密码错误，请重试。');
+  }
+}
+document.getElementById('pwInput').addEventListener('keydown',e=>{
+  if(e.key==='Enter')checkPassword();
+});
+</script>
+</body>
+</html>

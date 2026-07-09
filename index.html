@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MILANYA 泌澜雅 — Science in Nature</title>
+<meta name="description" content="MILANYA泌澜雅 — 以植物科学与屏障修护为核心的高端护肤品牌。氨基酸温和清洁，铁皮石斛深层补水，B5植萃修护屏障。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
+  color: #000;
+  background: #fff;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+img { display: block; max-width: 100%; }
+ul, ol { list-style: none; }
+
+/* ========== PRELOADER ========== */
+#preloader {
+  position: fixed; inset: 0; z-index: 10000;
+  background: #fff;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+#preloader .logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 300; letter-spacing: 12px; text-transform: uppercase;
+  color: #000; margin-bottom: 30px;
+}
+#preloader .progress-bar {
+  width: 120px; height: 1px; background: #e0e0e0; position: relative; overflow: hidden;
+}
+#preloader .progress-bar::after {
+  content: ''; position: absolute; left: 0; top: 0; height: 100%;
+  background: #000; width: 0; animation: loadProgress 1.5s ease forwards;
+}
+@keyframes loadProgress { to { width: 100%; } }
+
+/* ========== ANNOUNCEMENT BAR ========== */
+.announcement-bar {
+  height: 40px; background: #000;
+  display: flex; align-items: center; justify-content: center;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+}
+.announcement-bar a {
+  color: #fff; font-size: 12px; letter-spacing: 1.5px;
+  text-transform: uppercase; white-space: nowrap;
+  transition: opacity 0.3s;
+}
+.announcement-bar a:hover { opacity: 0.7; }
+
+/* ========== NAVIGATION ========== */
+.navbar {
+  position: fixed; top: 40px; left: 0; right: 0; z-index: 999;
+  background: #fff; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  transition: box-shadow 0.3s;
+}
+.navbar.scrolled { box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
+.nav-btn { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; }
+.nav-btn svg { width: 22px; height: 22px; stroke: #000; stroke-width: 1.5; fill: none; }
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 300; letter-spacing: 10px; text-transform: uppercase;
+  color: #000;
+}
+.nav-right { display: flex; gap: 20px; }
+
+/* ========== HAMBURGER MENU ========== */
+.hamburger span {
+  display: block; width: 22px; height: 1.5px; background: #000;
+  transition: all 0.3s ease;
+}
+.hamburger span + span { margin-top: 5px; }
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+/* ========== MOBILE MENU OVERLAY ========== */
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 998;
+  background: #fff; opacity: 0; visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  display: flex; align-items: center; justify-content: center;
+}
+.mobile-menu.active { opacity: 1; visibility: visible; }
+.mobile-menu-inner { text-align: center; }
+.mobile-menu-inner a {
+  display: block; font-size: clamp(24px, 4vw, 36px); font-weight: 300;
+  letter-spacing: 4px; text-transform: uppercase; color: #000;
+  padding: 16px 0; transition: opacity 0.3s;
+}
+.mobile-menu-inner a:hover { opacity: 0.5; }
+
+/* ========== HERO ========== */
+.hero {
+  height: 100vh; min-height: 600px; position: relative;
+  margin-top: 104px; /* 40 + 64 */
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('images/hero-banner.png') center/cover no-repeat;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.6));
+}
+.hero-content {
+  position: relative; z-index: 2; text-align: center; color: #fff;
+  padding: 0 24px; max-width: 700px;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5vw, 56px); font-weight: 300;
+  line-height: 1.2; letter-spacing: 2px; margin-bottom: 20px;
+}
+.hero-subtitle {
+  font-size: clamp(13px, 1.5vw, 16px); font-weight: 300;
+  opacity: 0.8; letter-spacing: 1px; margin-bottom: 36px;
+  line-height: 1.7;
+}
+.hero-btn {
+  display: inline-block; padding: 16px 48px;
+  border: 1.5px solid #fff; color: #fff;
+  font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 400; transition: all 0.4s ease;
+}
+.hero-btn:hover { background: #fff; color: #000; }
+
+/* ========== SECTION COMMONS ========== */
+.section {
+  padding: 100px 40px;
+}
+.section-label {
+  text-align: center; font-size: 11px; letter-spacing: 6px;
+  text-transform: uppercase; color: #999; margin-bottom: 16px;
+  font-weight: 400;
+}
+.section-title {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 44px); font-weight: 300;
+  letter-spacing: 1px; line-height: 1.3; margin-bottom: 16px;
+}
+.section-desc {
+  text-align: center; font-size: 15px; color: #666;
+  max-width: 560px; margin: 0 auto 60px; line-height: 1.8;
+  font-weight: 300;
+}
+
+/* ========== FEATURED PRODUCTS ========== */
+.products-section { background: #fff; }
+.products-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 28px; max-width: 1600px; margin: 0 auto;
+}
+.product-card { cursor: pointer; transition: background 0.4s ease; padding: 20px; }
+.product-card-image {
+  background: #F5F5F5; height: 420px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.4s ease;
+}
+.product-card-image img {
+  max-width: 85%; max-height: 85%; object-fit: contain;
+  transition: transform 0.5s ease;
+}
+.product-card:hover .product-card-image img { transform: scale(1.05); }
+.product-card-info { padding: 24px 4px 0; }
+.product-card-name {
+  font-size: 20px; font-weight: 500; letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.product-card-name-cn {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 15px; color: #888; font-weight: 300; margin-bottom: 12px;
+}
+.product-card-tagline {
+  font-size: 15px; color: #555; font-weight: 300;
+  line-height: 1.6; margin-bottom: 22px;
+}
+.btn-add-cart {
+  display: block; width: 100%; padding: 16px 0;
+  background: #000; color: #fff; font-size: 13px;
+  letter-spacing: 2px; text-transform: uppercase; text-align: center;
+  font-weight: 400; transition: all 0.3s ease;
+}
+.btn-add-cart:hover { background: #4A6741; }
+
+/* Product hover colors */
+.products-grid .product-card:nth-child(1):hover { background: #EDF4FA; }
+.products-grid .product-card:nth-child(1):hover .product-card-image { background: #E0ECF5; }
+.products-grid .product-card:nth-child(2):hover { background: #EDF5ED; }
+.products-grid .product-card:nth-child(2):hover .product-card-image { background: #E0EEE0; }
+.products-grid .product-card:nth-child(3):hover { background: #F5F2EC; }
+.products-grid .product-card:nth-child(3):hover .product-card-image { background: #EDE8DF; }
+.products-grid .product-card:nth-child(4):hover { background: #F5EDF0; }
+.products-grid .product-card:nth-child(4):hover .product-card-image { background: #EEE0E6; }
+.products-grid .product-card:nth-child(5):hover { background: #F0EDF5; }
+.products-grid .product-card:nth-child(5):hover .product-card-image { background: #E6E0EE; }
+
+/* ========== GALLERY ========== */
+.gallery-section { padding: 0; overflow: hidden; }
+.gallery-scroll {
+  display: flex; gap: 0;
+  animation: galleryScroll 30s linear infinite;
+}
+.gallery-scroll:hover { animation-play-state: paused; }
+@keyframes galleryScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.gallery-item {
+  min-width: calc(100vw / 6); height: 400px;
+  overflow: hidden; flex-shrink: 0;
+}
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.gallery-item:hover img { transform: scale(1.05); }
+
+/* ========== BRAND PHILOSOPHY ========== */
+.philosophy-section { background: #FAF9F7; }
+.philosophy-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 48px; max-width: 1100px; margin: 0 auto;
+}
+.philosophy-card { text-align: center; }
+.philosophy-icon {
+  width: 56px; height: 56px; margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+}
+.philosophy-icon svg { width: 36px; height: 36px; stroke: #4A6741; stroke-width: 1.2; fill: none; }
+.philosophy-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 400; letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.philosophy-title-cn {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px; color: #888; font-weight: 300; margin-bottom: 16px;
+}
+.philosophy-desc {
+  font-size: 14px; color: #666; line-height: 1.8;
+  font-weight: 300;
+}
+
+/* ========== SCIENCE ========== */
+.science-section { background: #fff; }
+.science-steps {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 48px; max-width: 1000px; margin: 0 auto;
+  text-align: center;
+}
+.science-step-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 300; color: #e8e8e8; margin-bottom: 20px;
+}
+.science-step-title {
+  font-size: 18px; font-weight: 500; letter-spacing: 1px;
+  margin-bottom: 8px; text-transform: uppercase;
+}
+.science-step-title-cn {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px; color: #888; font-weight: 300; margin-bottom: 16px;
+}
+.science-step-desc {
+  font-size: 14px; color: #666; line-height: 1.8; font-weight: 300;
+}
+
+/* ========== INGREDIENTS ========== */
+.ingredients-section { background: #FAF9F7; }
+.ingredients-filter {
+  display: flex; justify-content: center; gap: 8px;
+  margin-bottom: 48px; flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 8px 20px; font-size: 12px; letter-spacing: 1.5px;
+  text-transform: uppercase; border: 1px solid #ddd;
+  color: #666; transition: all 0.3s; font-weight: 400;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: #000; color: #fff; border-color: #000;
+}
+.ingredients-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; max-width: 1100px; margin: 0 auto;
+}
+.ingredient-card {
+  background: #fff; padding: 28px 24px; text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.ingredient-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+.ingredient-card-name {
+  font-size: 15px; font-weight: 500; margin-bottom: 4px;
+}
+.ingredient-card-name-en {
+  font-size: 11px; color: #999; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.ingredient-card-desc {
+  font-size: 13px; color: #666; line-height: 1.7; font-weight: 300;
+}
+.ingredient-card[data-category] { display: block; }
+.ingredient-card.hidden-card { display: none; }
+
+/* ========== ABOUT ========== */
+.about-section {
+  position: relative; padding: 0; min-height: 80vh;
+  display: flex; align-items: center;
+}
+.about-bg {
+  position: absolute; inset: 0;
+  background: url('images/brand-lab.png') center/cover no-repeat;
+}
+.about-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.6);
+}
+.about-content {
+  position: relative; z-index: 2; color: #fff;
+  max-width: 600px; padding: 100px 60px;
+}
+.about-label {
+  font-size: 11px; letter-spacing: 6px; text-transform: uppercase;
+  opacity: 0.7; margin-bottom: 20px;
+}
+.about-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3.5vw, 40px); font-weight: 300;
+  line-height: 1.3; margin-bottom: 24px; letter-spacing: 1px;
+}
+.about-desc {
+  font-size: 15px; line-height: 1.9; opacity: 0.85;
+  font-weight: 300; margin-bottom: 32px;
+}
+.about-btn {
+  display: inline-block; padding: 14px 40px;
+  border: 1.5px solid #fff; color: #fff;
+  font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
+  transition: all 0.4s;
+}
+.about-btn:hover { background: #fff; color: #000; }
+
+/* ========== CONTACT ========== */
+.contact-section { background: #fff; }
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; max-width: 1000px; margin: 0 auto;
+}
+.contact-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 300; margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+.contact-info p {
+  font-size: 14px; color: #666; line-height: 1.8;
+  font-weight: 300; margin-bottom: 8px;
+}
+.contact-info a { color: #000; transition: color 0.3s; }
+.contact-info a:hover { color: #4A6741; }
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.contact-form input,
+.contact-form textarea {
+  width: 100%; padding: 14px 0; border: none;
+  border-bottom: 1px solid #ddd; font-size: 14px;
+  font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
+  font-weight: 300; outline: none; background: transparent;
+  transition: border-color 0.3s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus { border-color: #000; }
+.contact-form textarea { resize: vertical; min-height: 100px; }
+.contact-form button {
+  align-self: flex-start; padding: 14px 40px;
+  background: #000; color: #fff; font-size: 12px;
+  letter-spacing: 2px; text-transform: uppercase;
+  transition: all 0.3s; font-weight: 400;
+}
+.contact-form button:hover { background: #4A6741; }
+
+/* ========== FOOTER ========== */
+.footer {
+  background: #1A1A1A; color: #fff; padding: 80px 40px 40px;
+}
+.footer-top {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 60px; max-width: 1200px; margin: 0 auto;
+  padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.footer-brand-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 300; letter-spacing: 8px;
+  text-transform: uppercase; margin-bottom: 16px;
+}
+.footer-brand-tagline {
+  font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 300;
+  line-height: 1.7; margin-bottom: 24px;
+}
+.footer-social { display: flex; gap: 16px; }
+.footer-social a {
+  width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.footer-social a:hover { background: #fff; border-color: #fff; }
+.footer-social a:hover svg { stroke: #000; }
+.footer-social svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 1.5; }
+.footer-col-title {
+  font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 20px; font-weight: 400;
+}
+.footer-col a {
+  display: block; font-size: 13px; color: rgba(255,255,255,0.5);
+  padding: 6px 0; transition: color 0.3s; font-weight: 300;
+}
+.footer-col a:hover { color: #fff; }
+.footer-newsletter input {
+  width: 100%; padding: 12px 0; background: transparent;
+  border: none; border-bottom: 1px solid rgba(255,255,255,0.2);
+  color: #fff; font-size: 13px; font-family: 'DM Sans', sans-serif;
+  font-weight: 300; outline: none; margin-bottom: 16px;
+}
+.footer-newsletter input::placeholder { color: rgba(255,255,255,0.3); }
+.footer-newsletter button {
+  padding: 10px 28px; border: 1px solid rgba(255,255,255,0.3);
+  color: #fff; font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; font-weight: 400;
+  transition: all 0.3s;
+}
+.footer-newsletter button:hover { background: #fff; color: #000; border-color: #fff; }
+.footer-bottom {
+  max-width: 1200px; margin: 0 auto;
+  padding-top: 30px; text-align: center;
+}
+.footer-bottom p {
+  font-size: 11px; color: rgba(255,255,255,0.3); font-weight: 300;
+  letter-spacing: 1px;
+}
+
+/* ========== PRODUCT MODAL ========== */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden;
+  transition: all 0.4s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal {
+  background: #fff; width: 100vw; height: 100vh;
+  max-width: none; max-height: none;
+  overflow-y: auto;
+  transform: translateY(30px); transition: transform 0.4s;
+  position: relative;
+}
+.modal-overlay.active .modal { transform: translateY(0); }
+.modal-close {
+  position: fixed; top: 20px; right: 20px; z-index: 100;
+  width: 48px; height: 48px; display: flex;
+  align-items: center; justify-content: center;
+  transition: opacity 0.3s; background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+.modal-close:hover { opacity: 0.5; }
+.modal-close svg { width: 20px; height: 20px; stroke: #000; stroke-width: 1.5; fill: none; }
+.modal-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  min-height: 100vh;
+}
+.modal-image {
+  background: #F5F5F5;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh;
+}
+.modal-image > img { width: 70%; height: 70%; object-fit: contain; }
+
+/* Modal Gallery */
+.modal-gallery {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+}
+.modal-gallery-main {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 40px;
+  min-height: 0;
+}
+.modal-gallery-main img {
+  max-width: 100%; max-height: 100%; object-fit: contain;
+}
+.modal-gallery-thumbs {
+  display: flex; gap: 12px; justify-content: center;
+  padding: 20px 40px 40px;
+}
+.modal-gallery-thumb {
+  width: 72px; height: 72px;
+  background: #fff; border: 2px solid transparent;
+  padding: 4px; cursor: pointer; transition: all 0.3s;
+  flex-shrink: 0;
+}
+.modal-gallery-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.modal-gallery-thumb.active { border-color: #000; }
+.modal-gallery-thumb:hover { border-color: #999; }
+.modal-info { padding: 48px 40px; display: flex; flex-direction: column; }
+.modal-tagline {
+  font-size: 13px; color: #888; font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+  margin-bottom: 8px; letter-spacing: 0.5px;
+}
+.modal-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 300; letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.modal-name-cn {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px; color: #888; font-weight: 300; margin-bottom: 20px;
+}
+.modal-desc {
+  font-size: 14px; color: #555; line-height: 1.8;
+  font-weight: 300; margin-bottom: 28px;
+}
+.modal-section-title {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: #999; margin-bottom: 12px; font-weight: 400;
+}
+.modal-benefits { margin-bottom: 24px; }
+.modal-benefits li {
+  font-size: 13px; padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0; font-weight: 300;
+  display: flex; align-items: center; gap: 8px;
+}
+.modal-benefits li::before {
+  content: ''; width: 4px; height: 4px; background: #4A6741;
+  border-radius: 50%; flex-shrink: 0;
+}
+.modal-ingredients-list { margin-bottom: 24px; }
+.modal-ingredient-item {
+  padding: 12px 0; border-bottom: 1px solid #f0f0f0;
+}
+.modal-ingredient-name {
+  font-size: 14px; font-weight: 500; margin-bottom: 2px;
+}
+.modal-ingredient-desc {
+  font-size: 12px; color: #888; font-weight: 300;
+}
+.modal-meta {
+  margin-top: auto; padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+.modal-meta-item {
+  font-size: 12px; color: #888; font-weight: 300;
+  padding: 4px 0;
+}
+.modal-meta-item strong { color: #000; font-weight: 500; }
+.modal-how-to {
+  margin-bottom: 24px; padding: 16px; background: #FAF9F7;
+  font-size: 13px; color: #555; line-height: 1.8; font-weight: 300;
+}
+.modal-cart-btn {
+  margin-top: 20px; width: 100%; padding: 16px 0;
+  background: #000; color: #fff; font-size: 12px;
+  letter-spacing: 2px; text-transform: uppercase;
+  transition: all 0.3s; font-weight: 400;
+}
+.modal-cart-btn:hover { background: #4A6741; }
+
+/* ========== REVEAL ANIMATION ========== */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.revealed { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ========== SCROLL TO TOP ========== */
+.scroll-top {
+  position: fixed; bottom: 30px; right: 30px; z-index: 900;
+  width: 44px; height: 44px; background: #000; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: all 0.3s;
+}
+.scroll-top.visible { opacity: 1; visibility: visible; }
+.scroll-top:hover { background: #4A6741; }
+.scroll-top svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1200px) {
+  .products-grid { grid-template-columns: repeat(5, 1fr); gap: 16px; }
+}
+@media (max-width: 1024px) {
+  .products-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .ingredients-grid { grid-template-columns: repeat(2, 1fr); }
+  .philosophy-grid { gap: 32px; }
+  .science-steps { gap: 32px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .modal-grid { grid-template-columns: 1fr; }
+  .modal-image { min-height: 50vh; }
+  .modal-gallery-main { padding: 24px; }
+  .modal-gallery-thumbs { padding: 12px 24px 24px; }
+  .modal-gallery-thumb { width: 56px; height: 56px; }
+}
+@media (max-width: 768px) {
+  .section { padding: 60px 20px; }
+  .navbar { padding: 0 20px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: none; margin: 0 auto; }
+  .ingredients-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .philosophy-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .science-steps { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .gallery-item { min-width: calc(100vw / 3); height: 280px; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer { padding: 60px 20px 30px; }
+  .hero { margin-top: 104px; }
+  .about-content { padding: 60px 24px; }
+  .modal-info { padding: 30px 20px; }
+  .modal-image { min-height: 40vh; }
+  .modal-gallery-main { padding: 16px; }
+  .modal-gallery-thumbs { padding: 8px 16px 16px; gap: 8px; }
+  .modal-gallery-thumb { width: 48px; height: 48px; padding: 2px; }
+  .announcement-bar a { font-size: 10px; letter-spacing: 1px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== PRELOADER ========== -->
+<div id="preloader">
+  <div class="logo-text">MILANYA</div>
+  <div class="progress-bar"></div>
+</div>
+
+<!-- ========== ANNOUNCEMENT BAR ========== -->
+<div class="announcement-bar">
+  <a href="#products">&#10024; 全新屏障修护系列上线 — 温和修护，唤醒肌肤自愈力 Shop Now &gt;</a>
+</div>
+
+<!-- ========== NAVIGATION ========== -->
+<nav class="navbar" id="navbar">
+  <button class="hamburger nav-btn" id="menuToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#" class="nav-logo">MILANYA</a>
+  <div class="nav-right">
+    <button class="nav-btn" aria-label="Search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    </button>
+    <button class="nav-btn" aria-label="Cart">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ========== MOBILE MENU ========== -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <a href="#products" onclick="closeMenu()">Products</a>
+    <a href="#philosophy" onclick="closeMenu()">Philosophy</a>
+    <a href="#science" onclick="closeMenu()">Science</a>
+    <a href="#ingredients" onclick="closeMenu()">Ingredients</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
+</div>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title reveal">Science in Nature,<br>Beauty in Balance</h1>
+    <p class="hero-subtitle reveal reveal-delay-1">以植物科学为基，屏障修护为本<br>MILANYA 泌澜雅 — 让每一滴精华，唤醒肌肤自愈力</p>
+    <a href="#products" class="hero-btn reveal reveal-delay-2">Shop Now</a>
+  </div>
+</section>
+
+<!-- ========== FEATURED PRODUCTS ========== -->
+<section class="section products-section" id="products">
+  <div class="section-label reveal">Lab in Nature</div>
+  <h2 class="section-title reveal reveal-delay-1">Featured Collection</h2>
+  <p class="section-desc reveal reveal-delay-2">以植物活性成分为核心，科学配比，精准修护。每一款产品都源自对肌肤屏障的深入理解。</p>
+  <div class="products-grid" id="productsGrid">
+    <!-- JS rendered -->
+  </div>
+</section>
+
+<!-- ========== GALLERY ========== -->
+<section class="gallery-section">
+  <div class="gallery-scroll" id="galleryScroll">
+    <!-- JS rendered, duplicated for infinite scroll -->
+  </div>
+</section>
+
+<!-- ========== BRAND PHILOSOPHY ========== -->
+<section class="section philosophy-section" id="philosophy">
+  <div class="section-label reveal">Clean Beauty In Balance</div>
+  <h2 class="section-title reveal reveal-delay-1">纯净之美，平衡之道</h2>
+  <p class="section-desc reveal reveal-delay-2">触及肌肤的美好，也应以善意触及世界。</p>
+  <div class="philosophy-grid">
+    <div class="philosophy-card reveal reveal-delay-1">
+      <div class="philosophy-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z" stroke-dasharray="3 3"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <h3 class="philosophy-title">From Nature</h3>
+      <p class="philosophy-title-cn">源于自然</p>
+      <p class="philosophy-desc">只给予肌肤真正需要的成分 — 不多一分，不添一害。每一种原料都经过纯度、安全性与功效的严格筛选。</p>
+    </div>
+    <div class="philosophy-card reveal reveal-delay-2">
+      <div class="philosophy-icon">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <h3 class="philosophy-title">Cruelty Free</h3>
+      <p class="philosophy-title-cn">零残忍</p>
+      <p class="philosophy-desc">产品研发与制造过程中从未进行动物实验，也永远不会。我们选择以善意代替捷径，始终安全、合乎伦理地测试。</p>
+    </div>
+    <div class="philosophy-card reveal reveal-delay-3">
+      <div class="philosophy-icon">
+        <svg viewBox="0 0 24 24"><path d="M2 22L16 8"/><path d="M12 2L22 12"/><path d="M2 12l4-4"/><path d="M22 2l-4 4"/><path d="M2 16l6-6"/><path d="M22 8l-6 6"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <h3 class="philosophy-title">Sustainable</h3>
+      <p class="philosophy-title-cn">可持续</p>
+      <p class="philosophy-desc">每一个选择都经过深思熟虑 — 保护我们共同分享的地球，以更温和的方式生长。可持续不是趋势，是我们践行一生的承诺。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SCIENCE ========== -->
+<section class="section science-section" id="science">
+  <div class="section-label reveal">Barrier Repair Science</div>
+  <h2 class="section-title reveal reveal-delay-1">屏障修护三步科学</h2>
+  <p class="section-desc reveal reveal-delay-2">MILANYA 以皮肤屏障科学为基础，通过清洁、补水、修护三大步骤，重建肌肤的天然防御力。</p>
+  <div class="science-steps">
+    <div class="reveal reveal-delay-1">
+      <div class="science-step-number">01</div>
+      <h3 class="science-step-title">Cleanse</h3>
+      <p class="science-step-title-cn">温和清洁</p>
+      <p class="science-step-desc">氨基酸表活体系，pH值与肌肤天然pH一致，清除污垢的同时保护皮脂膜不受损伤。</p>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="science-step-number">02</div>
+      <h3 class="science-step-title">Hydrate</h3>
+      <p class="science-step-title-cn">深层补水</p>
+      <p class="science-step-desc">铁皮石斛提取物+玻尿酸双重锁水系统，补水的同时形成保湿屏障，锁水力是普通精华的3倍。</p>
+    </div>
+    <div class="reveal reveal-delay-3">
+      <div class="science-step-number">03</div>
+      <h3 class="science-step-title">Repair</h3>
+      <p class="science-step-title-cn">屏障修护</p>
+      <p class="science-step-desc">1%泛醇+神经酰胺+角鲨烷黄金修护组合，从源头修复受损屏障，改善泛红、干燥、敏感问题。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== INGREDIENTS ========== -->
+<section class="section ingredients-section" id="ingredients">
+  <div class="section-label reveal">Key Ingredients</div>
+  <h2 class="section-title reveal reveal-delay-1">核心成分</h2>
+  <p class="section-desc reveal reveal-delay-2">甄选高活性植物萃取与前沿护肤科学成分，每一种都经过严格的功效验证。</p>
+  <div class="ingredients-filter reveal reveal-delay-3" id="ingredientFilter">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="botanical">植物萃取</button>
+    <button class="filter-btn" data-filter="science">科学成分</button>
+    <button class="filter-btn" data-filter="repair">修护成分</button>
+  </div>
+  <div class="ingredients-grid" id="ingredientsGrid">
+    <!-- JS rendered -->
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="about-section" id="about">
+  <div class="about-bg"></div>
+  <div class="about-overlay"></div>
+  <div class="about-content">
+    <p class="about-label reveal">About MILANYA</p>
+    <h2 class="about-title reveal reveal-delay-1">泌澜雅 — 泌自然之精粹，<br>澜肌肤之焕颜</h2>
+    <p class="about-desc reveal reveal-delay-2">MILANYA 泌澜雅诞生于对肌肤屏障科学的深度探索。我们相信，健康的肌肤来自平衡 — 屏障完整，肌肤才能自愈。<br><br>从铁皮石斛的锁水智慧到泛醇B5的70年临床验证，每一款产品都源自严谨的科学研究与纯净的自然馈赠。不追逐潮流，只专注于真正有效的护肤科学。</p>
+    <a href="#contact" class="about-btn reveal reveal-delay-3">Learn More</a>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section class="section contact-section" id="contact">
+  <div class="section-label reveal">Get in Touch</div>
+  <h2 class="section-title reveal reveal-delay-1">联系我们</h2>
+  <p class="section-desc reveal reveal-delay-2">任何关于产品、合作或品牌的问题，欢迎随时联系。</p>
+  <div class="contact-grid">
+    <div class="contact-info reveal reveal-delay-1">
+      <h3>MILANYA 泌澜雅</h3>
+      <p>品牌合作与商务咨询</p>
+      <p><a href="mailto:2250732320@qq.com">2250732320@qq.com</a></p>
+      <p style="margin-top: 16px;">消费者服务热线</p>
+      <p><a href="tel:13389249129">13389249129</a></p>
+      <p style="margin-top: 16px;">社交媒体</p>
+      <p>小红书 / 微博 / 抖音：泌澜雅护肤旗舰店</p>
+    </div>
+    <form class="contact-form reveal reveal-delay-2" onsubmit="handleSubmit(event)">
+      <input type="text" placeholder="姓名 Name" required>
+      <input type="email" placeholder="邮箱 Email" required>
+      <textarea placeholder="留言 Message"></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-logo">MILANYA</div>
+      <p class="footer-brand-tagline">泌自然之精粹，澜肌肤之焕颜。<br>Science in Nature, Beauty in Balance.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+        </a>
+        <a href="#" aria-label="WeChat">
+          <svg viewBox="0 0 24 24"><path d="M8.5 13.5c-1.5 0-2.5-.8-2.5-1.5s1-1.5 2.5-1.5 2.5.8 2.5 1.5-1 1.5-2.5 1.5z"/><path d="M15.5 16c-1.2 0-2-.6-2-1.2s.8-1.2 2-1.2 2 .6 2 1.2-.8 1.2-2 1.2z"/><path d="M21 12c0 4.4-4 8-9 8-1.2 0-2.3-.2-3.3-.5L3 21l1.5-4.7C3.6 14.8 3 13.5 3 12c0-4.4 4-8 9-8s9 3.6 9 8z"/><path d="M15.5 11.5c-1.5 0-2.5-.8-2.5-1.5s1-1.5 2.5-1.5 2.5.8 2.5 1.5-1 1.5-2.5 1.5z"/></svg>
+        </a>
+        <a href="#" aria-label="Red">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 class="footer-col-title">Shop</h4>
+      <a href="#products">全部产品</a>
+      <a href="#products">洁面乳</a>
+      <a href="#products">精华水</a>
+      <a href="#products">修复套盒</a>
+      <a href="#products">修护乳</a>
+    </div>
+    <div class="footer-col">
+      <h4 class="footer-col-title">Brand</h4>
+      <a href="#about">品牌故事</a>
+      <a href="#science">屏障科学</a>
+      <a href="#ingredients">核心成分</a>
+      <a href="#philosophy">品牌理念</a>
+    </div>
+    <div class="footer-col">
+      <h4 class="footer-col-title">Newsletter</h4>
+      <div class="footer-newsletter">
+        <input type="email" placeholder="输入邮箱订阅最新资讯">
+        <button type="button">Subscribe</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 MILANYA 泌澜雅. All rights reserved. Science in Nature, Beauty in Balance.</p>
+  </div>
+</footer>
+
+<!-- ========== SCROLL TO TOP ========== -->
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- ========== PRODUCT MODAL ========== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-grid" id="modalContent">
+      <!-- JS rendered -->
+    </div>
+  </div>
+</div>
+
+<script>
+// ========== PRODUCT DATA ==========
+const products = [
+  {
+    image:'images/product-cleanser.jpg',
+    images:['images/product-cleanser.jpg','images/product-cleanser-1.png','images/product-cleanser-2.png','images/product-cleanser-3.png','images/product-cleanser-4.png'],
+    name:'Amino Acid Gentle Cleanser', nameCn:'氨基酸净润洁面乳',
+    tagline:'洗完不紧绷，才是真干净。',
+    desc:'纯氨基酸表活体系（月桂酰谷氨酸钠+椰油酰甘氨酸钠），pH值弱酸性，与健康皮肤天然pH值一致。不加皂基，不伤皮脂膜。添加积雪草提取物+泛醇B5，洗脸同时舒缓保湿。',
+    benefits:['温和清洁不伤屏障','洗后不紧绷','轻松卸彩妆','清爽不假滑','敏感肌可用'],
+    ingredients:[{name:'氨基酸表活',desc:'pH弱酸性（≈5.5），温和净澈'},{name:'积雪草提取物',desc:'舒缓抗炎，镇静肌肤'},{name:'泛醇B5',desc:'保湿锁水，修护屏障'}],
+    texture:'奶霜般细腻泡沫', bestFor:'干皮/混干皮 · 敏感肌 · 日常淡妆党',
+    howToUse:'取适量加水揉搓起泡 → 轻柔按摩30秒 → 清水洗净',
+    details:'100g · Cream Cleanser · Made in China'
+  },
+  {
+    image:'images/product-essence.jpg',
+    images:['images/product-essence.jpg','images/product-essence-1.jpg','images/product-essence-2.jpg','images/product-essence-3.jpg','images/product-essence-4.jpg'],
+    name:'Dendrobium HA Essence', nameCn:'铁皮石斛玻尿酸舒缓保湿精华水',
+    tagline:'锁水力是普通水的3倍。',
+    desc:'融合铁皮石斛提取物、玻尿酸及双重发酵成分，吸收率从5%拉到35%，锁水力是普通植物的3倍。一补一锁，水才留得住。',
+    benefits:['深层补水','长效锁水','清爽不粘','提升吸收','舒缓干燥'],
+    ingredients:[{name:'铁皮石斛提取物',desc:'锁水王牌，3倍锁水力'},{name:'玻尿酸',desc:'1分子抓住1000倍水分'},{name:'双重发酵提取物',desc:'吸收率从5%提升至35%'}],
+    texture:'清透水感精华', bestFor:'缺水肌 · 干皮 · 混干皮 · 空调房人群',
+    howToUse:'洁面后轻拍全脸 → 重复2-3次加强补水',
+    details:'120ml · Water Essence · Made in China'
+  },
+  {
+    image:'images/product-b5-lotion.jpg',
+    images:['images/product-b5-lotion.jpg','images/product-b5-lotion-1.jpg','images/product-b5-lotion-2.png','images/product-b5-lotion-3.jpg','images/product-b5-lotion-4.jpg'],
+    name:'B5 Botanical Repair Lotion', nameCn:'维原B5植萃舒润乳',
+    tagline:'一瓶稳住泛红干痒。',
+    desc:'采用1%泛醇、神经酰胺、角鲨烷及多重植物舒缓成分，帮助改善泛红、干燥、紧绷等屏障问题。一抹化水，油皮不闷。',
+    benefits:['修护肌肤屏障','舒缓泛红','保湿锁水','清爽不闷痘','一抹化水'],
+    ingredients:[{name:'1%泛醇B5',desc:'70年临床验证，源头褪红止痒'},{name:'红没药醇',desc:'5天内红斑减少17.2%'},{name:'角鲨烷',desc:'97%与人体皮脂相似'},{name:'神经酰胺NP/AP',desc:'减少水分流失32%'}],
+    texture:'丝滑乳液 · 一抹化水', bestFor:'敏感肌 · 泛红肌 · 屏障受损 · 外油内干',
+    howToUse:'爽肤水后使用 → 均匀涂抹全脸 → 轻柔按摩吸收',
+    details:'100ml · Repair Lotion · Made in China'
+  },
+  {
+    image:'images/product-repair-kit.jpg',
+    images:['images/product-repair-kit.jpg','images/product-repair-kit-1.jpg','images/product-repair-kit-2.jpg','images/product-repair-kit-3.jpg'],
+    name:'Firming Radiance Repair Kit', nameCn:'紧致焕彩修复套盒',
+    tagline:'唤醒细胞的自愈对话。',
+    desc:'-80℃真空冷冻干燥工艺，甄选动物脐带提取物（150亿活性单位），深入肌底唤醒细胞内源修护力，提供紧致提拉、屏障修护、匀亮焕颜的多维护理。',
+    benefits:['鲜活修护','紧致弹润','提亮肤色','改善粗糙','提升肌肤状态'],
+    ingredients:[{name:'动物脐带提取物',desc:'150亿活性单位'},{name:'甘露糖醇',desc:'天然保湿，稳定活性'},{name:'丁二醇',desc:'协同保湿，提升渗透'}],
+    texture:'鲜活精华液', bestFor:'熬夜肌 · 暗沉肌 · 初老肌 · 松弛肌',
+    howToUse:'混合冻干粉与溶液 → 摇匀 → 立即使用',
+    details:'冻干粉1.5ml+溶媒液5ml · 7组/盒'
+  },
+  {
+    image:'images/product-portable-kit.jpg',
+    images:['images/product-portable-kit.jpg','images/product-portable-kit-1.jpg','images/product-portable-kit-2.jpg','images/product-portable-kit-3.jpg'],
+    name:'Portable Repair Kit', nameCn:'便携紧致焕彩修复套盒',
+    tagline:'焕活肌肤 · 重建光采。',
+    desc:'水光分离冻干形式，-80℃真空冷冻干燥工艺，甄选动物脐带提取物（50亿活性单位），提供深入肌底的密集修护护理。',
+    benefits:['密集修护','提亮肤色','改善粗糙','紧致弹润','提升光泽'],
+    ingredients:[{name:'动物脐带提取物',desc:'50亿活性单位'},{name:'甘露糖醇',desc:'天然保湿'},{name:'丁二醇',desc:'协同保湿'}],
+    texture:'轻盈修护精华', bestFor:'暗沉肌 · 松弛肌 · 熟龄肌 · 熬夜肌',
+    howToUse:'混合冻干粉与溶液 → 摇匀 → 立即使用',
+    details:'冻干粉0.22ml+溶媒液3ml · 6组/盒'
+  }
+];
+
+// ========== INGREDIENT DATA ==========
+const ingredientData = [
+  { name:'氨基酸表活', nameEn:'Amino Acid Surfactant', desc:'pH弱酸性，与健康肌肤pH一致，温和清除污垢的同时保护皮脂膜。', category:'botanical' },
+  { name:'铁皮石斛提取物', nameEn:'Dendrobium Extract', desc:'"九大仙草"之首，锁水力是普通植物的3倍，深层补水屏障。', category:'botanical' },
+  { name:'积雪草提取物', nameEn:'Centella Asiatica', desc:'天然舒缓抗炎成分，有效镇静肌肤，缓解敏感不适。', category:'botanical' },
+  { name:'红没药醇', nameEn:'Bisabolol', desc:'源自洋甘菊的天然舒缓成分，临床验证5天内红斑减少17.2%。', category:'botanical' },
+  { name:'玻尿酸', nameEn:'Hyaluronic Acid', desc:'1分子可抓住1000倍水分，实现多层次的深度补水。', category:'science' },
+  { name:'双重发酵提取物', nameEn:'Dual Ferment Extract', desc:'通过发酵工艺将吸收率从5%提升至35%，大幅增强渗透性。', category:'science' },
+  { name:'泛醇 B5', nameEn:'Panthenol (B5)', desc:'70年临床验证的修护成分，源头褪红止痒，促进细胞再生。', category:'repair' },
+  { name:'神经酰胺', nameEn:'Ceramide NP/AP', desc:'皮肤屏障的核心成分，减少水分流失32%，重建肌肤天然屏障。', category:'repair' },
+  { name:'角鲨烷', nameEn:'Squalane', desc:'97%与人体皮脂相似，形成天然保湿膜而不致痘。', category:'repair' },
+  { name:'动物脐带提取物', nameEn:'Umbilical Extract', desc:'-80℃冻干工艺保存的高活性成分，150亿活性单位深入肌底修护。', category:'science' },
+  { name:'甘露糖醇', nameEn:'Mannitol', desc:'天然保湿剂，同时稳定冻干粉中的活性成分，延长保鲜期。', category:'science' },
+  { name:'丁二醇', nameEn:'Butylene Glycol', desc:'高效保湿剂，协同其他成分提升渗透力，改善使用质感。', category:'science' }
+];
+
+// ========== GALLERY DATA ==========
+const galleryImages = [
+  'images/product-cleanser.jpg',
+  'images/brand-lab.png',
+  'images/product-essence.jpg',
+  'images/product-repair-kit.jpg',
+  'images/product-b5-lotion.jpg',
+  'images/product-portable-kit.jpg'
+];
+
+// ========== RENDER PRODUCTS ==========
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = products.map((p, i) => `
+    <div class="product-card reveal reveal-delay-${Math.min(i+1, 5)}" onclick="openModal(${i})">
+      <div class="product-card-image">
+        <img src="${p.image}" alt="${p.name}" loading="lazy">
+      </div>
+      <div class="product-card-info">
+        <div class="product-card-name">${p.name}</div>
+        <div class="product-card-name-cn">${p.nameCn}</div>
+        <div class="product-card-tagline">${p.tagline}</div>
+        <button class="btn-add-cart" onclick="event.stopPropagation()">Add to Cart</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ========== RENDER GALLERY ==========
+function renderGallery() {
+  const scroll = document.getElementById('galleryScroll');
+  const items = [...galleryImages, ...galleryImages]; // duplicate for infinite
+  scroll.innerHTML = items.map(src => `
+    <div class="gallery-item">
+      <img src="${src}" alt="MILANYA Gallery" loading="lazy">
+    </div>
+  `).join('');
+}
+
+// ========== RENDER INGREDIENTS ==========
+function renderIngredients(filter = 'all') {
+  const grid = document.getElementById('ingredientsGrid');
+  grid.innerHTML = ingredientData.map((ing, i) => `
+    <div class="ingredient-card ${filter !== 'all' && ing.category !== filter ? 'hidden-card' : ''}"
+         data-category="${ing.category}">
+      <div class="ingredient-card-name">${ing.name}</div>
+      <div class="ingredient-card-name-en">${ing.nameEn}</div>
+      <div class="ingredient-card-desc">${ing.desc}</div>
+    </div>
+  `).join('');
+}
+
+// ========== INGREDIENT FILTER ==========
+document.getElementById('ingredientFilter').addEventListener('click', function(e) {
+  if (e.target.classList.contains('filter-btn')) {
+    this.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    renderIngredients(e.target.dataset.filter);
+  }
+});
+
+// ========== MODAL ==========
+let galleryInterval = null;
+let currentGalleryIndex = 0;
+let currentGalleryImages = [];
+let currentGalleryId = '';
+
+function openModal(index) {
+  const p = products[index];
+  const overlay = document.getElementById('modalOverlay');
+  const content = document.getElementById('modalContent');
+  const hasGallery = p.images && p.images.length > 1;
+  const galleryId = 'mg-' + index;
+  currentGalleryImages = hasGallery ? p.images : [];
+  currentGalleryId = galleryId;
+  currentGalleryIndex = 0;
+  content.innerHTML = `
+    <div class="modal-image">
+      ${hasGallery ? `
+        <div class="modal-gallery" id="${galleryId}">
+          <div class="modal-gallery-main">
+            <img src="${p.image}" alt="${p.name}" id="${galleryId}-main">
+          </div>
+          <div class="modal-gallery-thumbs">
+            ${p.images.map((img, i) => `
+              <button class="modal-gallery-thumb${i===0?' active':''}" data-src="${img}" data-gallery="${galleryId}" data-index="${i}" onclick="setGalleryImage(this)">
+                <img src="${img}" alt="">
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      ` : `<img src="${p.image}" alt="${p.name}">`}
+    </div>
+    <div class="modal-info">
+      <div class="modal-tagline">"${p.tagline}"</div>
+      <h2 class="modal-name">${p.name}</h2>
+      <p class="modal-name-cn">${p.nameCn}</p>
+      <p class="modal-desc">${p.desc}</p>
+      <div class="modal-section-title">Benefits</div>
+      <ul class="modal-benefits">
+        ${p.benefits.map(b => `<li>${b}</li>`).join('')}
+      </ul>
+      <div class="modal-section-title">Key Ingredients</div>
+      <div class="modal-ingredients-list">
+        ${p.ingredients.map(ing => `
+          <div class="modal-ingredient-item">
+            <div class="modal-ingredient-name">${ing.name}</div>
+            <div class="modal-ingredient-desc">${ing.desc}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="modal-section-title">How to Use</div>
+      <div class="modal-how-to">${p.howToUse}</div>
+      <div class="modal-meta">
+        <div class="modal-meta-item"><strong>Texture:</strong> ${p.texture}</div>
+        <div class="modal-meta-item"><strong>Best For:</strong> ${p.bestFor}</div>
+        <div class="modal-meta-item"><strong>Details:</strong> ${p.details}</div>
+      </div>
+      <button class="modal-cart-btn" onclick="event.stopPropagation()">Add to Cart</button>
+    </div>
+  `;
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // Auto-play gallery
+  if (hasGallery) {
+    startGalleryAutoplay();
+    const galleryEl = document.getElementById(galleryId);
+    galleryEl.addEventListener('mouseenter', stopGalleryAutoplay);
+    galleryEl.addEventListener('mouseleave', startGalleryAutoplay);
+  }
+}
+
+function startGalleryAutoplay() {
+  if (galleryInterval) clearInterval(galleryInterval);
+  galleryInterval = setInterval(() => {
+    if (!currentGalleryImages.length) return;
+    currentGalleryIndex = (currentGalleryIndex + 1) % currentGalleryImages.length;
+    const nextImg = currentGalleryImages[currentGalleryIndex];
+    document.getElementById(currentGalleryId + '-main').src = nextImg;
+    document.querySelectorAll(`[data-gallery="${currentGalleryId}"]`).forEach((b, i) => {
+      b.classList.toggle('active', i === currentGalleryIndex);
+    });
+  }, 3000);
+}
+
+function stopGalleryAutoplay() {
+  if (galleryInterval) {
+    clearInterval(galleryInterval);
+    galleryInterval = null;
+  }
+}
+
+function setGalleryImage(btn) {
+  const galleryId = btn.dataset.gallery;
+  const src = btn.dataset.src;
+  currentGalleryIndex = parseInt(btn.dataset.index);
+  currentGalleryId = galleryId;
+  document.getElementById(galleryId + '-main').src = src;
+  document.querySelectorAll(`[data-gallery="${galleryId}"]`).forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function closeModal() {
+  stopGalleryAutoplay();
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ========== HAMBURGER MENU ==========
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+menuToggle.addEventListener('click', function() {
+  this.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+  document.body.style.overflow = this.classList.contains('active') ? 'hidden' : '';
+});
+function closeMenu() {
+  menuToggle.classList.remove('active');
+  mobileMenu.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ========== NAVBAR SCROLL ==========
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', function() {
+  navbar.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// ========== SCROLL TO TOP ==========
+const scrollTopBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', function() {
+  scrollTopBtn.classList.toggle('visible', window.scrollY > 600);
+});
+scrollTopBtn.addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ========== REVEAL ON SCROLL ==========
+function initReveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+}
+
+// ========== PRELOADER ==========
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('preloader').classList.add('hidden');
+  }, 1800);
+});
+
+// ========== CONTACT FORM ==========
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  const origText = btn.textContent;
+  btn.textContent = 'Sent ✓';
+  btn.style.background = '#4A6741';
+  setTimeout(function() {
+    btn.textContent = origText;
+    btn.style.background = '';
+    e.target.reset();
+  }, 2000);
+}
+
+// ========== ESC KEY ==========
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeModal();
+    closeMenu();
+  }
+});
+
+// ========== INIT ==========
+renderProducts();
+renderGallery();
+renderIngredients();
+setTimeout(initReveal, 100);
+</script>
+</body>
+</html>
