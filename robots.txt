@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lxp-1998.github.io/milanya/sitemap.xml
+Sitemap: https://www.milanya-beauty.com/sitemap.xml
