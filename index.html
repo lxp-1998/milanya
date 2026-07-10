@@ -209,67 +209,96 @@ ul, ol { list-style: none; }
 .products-grid .product-card:nth-child(5):hover { background: #F0EDF5; }
 .products-grid .product-card:nth-child(5):hover .product-card-image { background: #E6E0EE; }
 
-/* ========== AUDIENCE (WHO IS IT FOR) ========== */
-.audience-section { background: #FAFAFA; }
-.audience-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 32px; max-width: 1300px; margin: 0 auto;
+/* ========== AUDIENCE — MAGAZINE EDITORIAL ========== */
+.audience-section { padding: 0; background: #fff; }
+.audience-header {
+  text-align: center; padding: 100px 40px 60px;
 }
-.audience-card {
-  background: #fff; overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
+.audience-section .section-label {
+  font-size: 11px; letter-spacing: 6px;
+  text-transform: uppercase; color: #999; margin-bottom: 16px;
+  font-weight: 400;
 }
-.audience-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+.audience-section .section-title {
+  font-family: 'Georgia', 'STSong', 'SimSun', serif;
+  font-size: clamp(28px, 4vw, 44px); font-weight: 300;
+  letter-spacing: 1px; line-height: 1.3;
 }
-.audience-card-img {
-  width: 100%; height: 320px; overflow: hidden;
+
+.audience-slide {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 70vh; align-items: center;
 }
-.audience-card-img img {
+.audience-slide + .audience-slide { border-top: 1px solid #F0F0F0; }
+
+.audience-slide-img {
+  width: 100%; height: 100%; min-height: 60vh; overflow: hidden;
+}
+.audience-slide-img img {
   width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.8s ease;
 }
-.audience-card:hover .audience-card-img img { transform: scale(1.05); }
-.audience-card-body { padding: 24px 20px 28px; }
-.audience-card-title {
-  font-size: 20px; font-weight: 600; letter-spacing: 1px;
-  margin-bottom: 4px;
+.audience-slide:hover .audience-slide-img img { transform: scale(1.03); }
+
+.audience-slide-text {
+  padding: 60px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.audience-num {
+  font-family: 'Georgia', serif; font-size: 72px; font-weight: 300;
+  color: #F0F0F0; line-height: 1; margin-bottom: -20px;
+  letter-spacing: -2px;
+}
+
+.audience-cn {
   font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: clamp(28px, 3vw, 42px); font-weight: 600;
+  letter-spacing: 3px; margin-bottom: 4px; color: #000;
 }
-.audience-card-subtitle {
-  font-size: 11px; color: #999; letter-spacing: 1.5px;
-  text-transform: uppercase; margin-bottom: 12px;
+
+.audience-en {
+  font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  color: #999; margin-bottom: 24px; font-weight: 300;
 }
-.audience-card-desc {
-  font-size: 13px; color: #666; margin-bottom: 16px;
-  font-weight: 300;
+
+.audience-divider {
+  width: 40px; height: 1px; background: #000; margin-bottom: 24px;
 }
-.audience-card-symptoms {
-  margin-bottom: 16px; padding-left: 0;
-  list-style: none;
+
+.audience-skin-type {
+  font-size: 14px; color: #666; margin-bottom: 16px;
+  font-weight: 300; letter-spacing: 1px;
 }
-.audience-card-symptoms li {
-  font-size: 13px; color: #888; padding: 3px 0;
-  position: relative; padding-left: 14px;
+
+.audience-detail {
+  font-size: 15px; color: #444; line-height: 1.8;
+  font-weight: 300; margin-bottom: 28px;
 }
-.audience-card-symptoms li::before {
-  content: ''; position: absolute; left: 0; top: 50%;
-  transform: translateY(-50%);
-  width: 4px; height: 4px; border-radius: 50%;
-  background: #ccc;
+
+.audience-rec {
+  font-size: 13px; color: #4A6741; font-weight: 500;
+  letter-spacing: 0.5px; line-height: 1.6;
 }
-.audience-card-products {
-  font-size: 12px; color: #4A6741; font-weight: 500;
-  padding-top: 12px; border-top: 1px solid #F0F0F0;
-  letter-spacing: 0.5px;
+.audience-rec-label {
+  display: block; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: #999; margin-bottom: 6px;
+  font-weight: 400;
 }
-@media (max-width: 1024px) {
-  .audience-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-}
-@media (max-width: 640px) {
-  .audience-grid { grid-template-columns: 1fr; gap: 16px; }
-  .audience-card-img { height: 240px; }
+
+.audience-text-left { order: 1; }
+.audience-slide:nth-child(even) .audience-text-left { order: 2; }
+
+@media (max-width: 900px) {
+  .audience-slide {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .audience-slide-img { min-height: 40vh; }
+  .audience-slide-text { padding: 40px 32px; }
+  .audience-num { font-size: 48px; }
+  .audience-text-left { order: 1 !important; }
+  .audience-slide:nth-child(even) .audience-slide-text { order: 2; }
 }
 
 /* ========== GALLERY ========== */
@@ -766,71 +795,105 @@ ul, ol { list-style: none; }
   </div>
 </section>
 
-<!-- ========== WHO IS IT FOR ========== -->
-<section class="section audience-section" id="audience">
-  <p class="section-label reveal">Who Is It For</p>
-  <h2 class="section-title reveal reveal-delay-1">适用人群</h2>
-  <p class="section-desc reveal reveal-delay-2">无论你属于哪种肤质，MILANYA 都有适合你的屏障修护方案。</p>
-  <div class="audience-grid">
-    <div class="audience-card reveal">
-      <div class="audience-card-img">
-        <img src="images/audience-dry-sensitive.jpg" alt="干敏肌" loading="lazy">
-      </div>
-      <div class="audience-card-body">
-        <h3 class="audience-card-title">干敏肌</h3>
-        <p class="audience-card-subtitle">Dry & Sensitive Skin</p>
-        <p class="audience-card-desc">干皮 · 混干皮 · 敏感肌</p>
-        <ul class="audience-card-symptoms">
-          <li>紧绷起皮 · 泛红发痒</li>
-          <li>换季不适 · 水油失衡</li>
-        </ul>
-        <p class="audience-card-products">推荐：氨基酸洁面乳 + 铁皮石斛精华水</p>
-      </div>
+<!-- ========== WHO IS IT FOR — MAGAZINE EDITORIAL ========== -->
+<section class="audience-section" id="audience">
+  <div class="audience-header">
+    <p class="section-label reveal">Who Is It For</p>
+    <h2 class="section-title reveal reveal-delay-1">适用人群</h2>
+  </div>
+
+  <!-- Slide 1: 干敏肌 — 文字左，大图右 -->
+  <div class="audience-slide reveal">
+    <div class="audience-slide-text audience-text-left">
+      <span class="audience-num">01</span>
+      <h3 class="audience-cn">干敏肌</h3>
+      <p class="audience-en">Dry &amp; Sensitive Skin</p>
+      <div class="audience-divider"></div>
+      <p class="audience-skin-type">干皮 · 混干皮 · 敏感肌</p>
+      <p class="audience-detail">紧绷起皮，泛红发痒，换季不适，水油失衡。<br>需要温和清洁与深层补水，重建肌肤保湿屏障。</p>
+      <p class="audience-rec">
+        <span class="audience-rec-label">RECOMMENDED</span>
+        氨基酸洁面乳 + 铁皮石斛精华水
+      </p>
     </div>
-    <div class="audience-card reveal reveal-delay-1">
-      <div class="audience-card-img">
-        <img src="images/audience-barrier-damaged.jpg" alt="屏障受损" loading="lazy">
-      </div>
-      <div class="audience-card-body">
-        <h3 class="audience-card-title">屏障受损</h3>
-        <p class="audience-card-subtitle">Damaged Skin Barrier</p>
-        <p class="audience-card-desc">泛红肌 · 屏障受损 · 外油内干</p>
-        <ul class="audience-card-symptoms">
-          <li>泛红刺痛 · 屏障脆弱</li>
-          <li>外油内干 · 反复敏感</li>
-        </ul>
-        <p class="audience-card-products">推荐：B5植萃舒润乳 + 修复套盒</p>
-      </div>
+    <div class="audience-slide-img">
+      <img src="images/audience-dry-sensitive.jpg" alt="干敏肌" loading="lazy">
     </div>
-    <div class="audience-card reveal reveal-delay-2">
-      <div class="audience-card-img">
-        <img src="images/audience-dull-tired.jpg" alt="熬夜暗沉" loading="lazy">
-      </div>
-      <div class="audience-card-body">
-        <h3 class="audience-card-title">熬夜暗沉</h3>
-        <p class="audience-card-subtitle">Dull & Tired Skin</p>
-        <p class="audience-card-desc">熬夜肌 · 暗沉肌 · 初老肌</p>
-        <ul class="audience-card-symptoms">
-          <li>肤色暗沉 · 熬夜蜡黄</li>
-          <li>细纹初显 · 缺乏光泽</li>
-        </ul>
-        <p class="audience-card-products">推荐：修复套盒 + 便携修复套盒</p>
-      </div>
+  </div>
+
+  <!-- Slide 2: 屏障受损 — 大图左，文字右 -->
+  <div class="audience-slide reveal">
+    <div class="audience-slide-img">
+      <img src="images/audience-barrier-damaged.jpg" alt="屏障受损" loading="lazy">
     </div>
-    <div class="audience-card reveal reveal-delay-3">
-      <div class="audience-card-img">
-        <img src="images/audience-mature.jpg" alt="熟龄松弛" loading="lazy">
-      </div>
-      <div class="audience-card-body">
-        <h3 class="audience-card-title">熟龄松弛</h3>
-        <p class="audience-card-subtitle">Mature & Sagging Skin</p>
-        <p class="audience-card-desc">熟龄肌 · 松弛肌 · 皱纹肌</p>
-        <ul class="audience-card-symptoms">
-          <li>肌肤松弛 · 弹性下降</li>
-          <li>轮廓模糊 · 皱纹加深</li>
-        </ul>
-        <p class="audience-card-products">推荐：便携修复套盒 + B5植萃舒润乳</p>
-      </div>
+    <div class="audience-slide-text audience-text-right">
+      <span class="audience-num">02</span>
+      <h3 class="audience-cn">屏障受损</h3>
+      <p class="audience-en">Damaged Skin Barrier</p>
+      <div class="audience-divider"></div>
+      <p class="audience-skin-type">泛红肌 · 屏障受损 · 外油内干</p>
+      <p class="audience-detail">泛红刺痛，屏障脆弱，外油内干，反复敏感。<br>需要从源头修复受损屏障，恢复肌肤自我防御力。</p>
+      <p class="audience-rec">
+        <span class="audience-rec-label">RECOMMENDED</span>
+        B5植萃舒润乳 + 修复套盒
+      </p>
+    </div>
+  </div>
+
+  <!-- Slide 3: 油痘肌 — 文字左，大图右 -->
+  <div class="audience-slide reveal">
+    <div class="audience-slide-text audience-text-left">
+      <span class="audience-num">03</span>
+      <h3 class="audience-cn">油痘肌</h3>
+      <p class="audience-en">Oily &amp; Acne-Prone Skin</p>
+      <div class="audience-divider"></div>
+      <p class="audience-skin-type">油皮 · 混油皮 · 痘痘肌</p>
+      <p class="audience-detail">T区泛油，毛孔粗大，反复爆痘，痘印难消。<br>需要平衡水油，温和抑痘，修护痘损屏障。</p>
+      <p class="audience-rec">
+        <span class="audience-rec-label">RECOMMENDED</span>
+        氨基酸洁面乳 + 铁皮石斛精华水
+      </p>
+    </div>
+    <div class="audience-slide-img">
+      <img src="images/audience-oily-acne.jpg" alt="油痘肌" loading="lazy">
+    </div>
+  </div>
+
+  <!-- Slide 4: 熬夜暗沉 — 大图左，文字右 -->
+  <div class="audience-slide reveal">
+    <div class="audience-slide-img">
+      <img src="images/audience-dull-tired.jpg" alt="熬夜暗沉" loading="lazy">
+    </div>
+    <div class="audience-slide-text audience-text-right">
+      <span class="audience-num">04</span>
+      <h3 class="audience-cn">熬夜暗沉</h3>
+      <p class="audience-en">Dull &amp; Tired Skin</p>
+      <div class="audience-divider"></div>
+      <p class="audience-skin-type">熬夜肌 · 暗沉肌 · 初老肌</p>
+      <p class="audience-detail">肤色暗沉，熬夜蜡黄，细纹初显，缺乏光泽。<br>需要深层修护，焕活细胞，重建肌肤光采。</p>
+      <p class="audience-rec">
+        <span class="audience-rec-label">RECOMMENDED</span>
+        修复套盒 + 便携修复套盒
+      </p>
+    </div>
+  </div>
+
+  <!-- Slide 5: 熟龄松弛 — 文字左，大图右 -->
+  <div class="audience-slide reveal">
+    <div class="audience-slide-text audience-text-left">
+      <span class="audience-num">05</span>
+      <h3 class="audience-cn">熟龄松弛</h3>
+      <p class="audience-en">Mature &amp; Sagging Skin</p>
+      <div class="audience-divider"></div>
+      <p class="audience-skin-type">熟龄肌 · 松弛肌 · 皱纹肌</p>
+      <p class="audience-detail">肌肤松弛，弹性下降，轮廓模糊，皱纹加深。<br>需要高活性修护成分，紧致轮廓，对抗岁月痕迹。</p>
+      <p class="audience-rec">
+        <span class="audience-rec-label">RECOMMENDED</span>
+        便携修复套盒 + B5植萃舒润乳
+      </p>
+    </div>
+    <div class="audience-slide-img">
+      <img src="images/audience-mature.jpg" alt="熟龄松弛" loading="lazy">
     </div>
   </div>
 </section>
